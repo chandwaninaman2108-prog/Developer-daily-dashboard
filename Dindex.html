@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Developer Daily Briefing Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen p-6 font-sans">
+  <div class="max-w-4xl mx-auto space-y-6">
+
+    <!-- Header -->
+    <header class="flex justify-between items-center border-b border-slate-700 pb-4">
+      <div>
+        <h1 class="text-3xl font-bold text-amber-400">Developer Dashboard</h1>
+        <p class="text-slate-400 text-sm">Real-time daily telemetry & inspiration</p>
+      </div>
+      <button id="refreshBtn" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold px-4 py-2 rounded-lg transition">
+        Refresh Dashboard
+      </button>
+    </header>
+
+    <!-- Error Banner (Hidden by default) -->
+    <div id="errorBanner" class="hidden bg-red-900/50 border border-red-500 text-red-200 px-4 py-3 rounded-xl text-sm">
+      <span id="errorMessage">An error occurred while fetching dashboard data.</span>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <!-- Weather Card -->
+      <div class="bg-slate-800 border border-slate-700 p-6 rounded-2xl shadow-xl">
+        <h2 class="text-lg font-semibold text-slate-300 mb-3 flex items-center gap-2">
+          <span>🌦️</span> Local Weather
+        </h2>
+        <div id="weatherLoader" class="animate-pulse flex space-x-4">
+          <div class="flex-1 space-y-3 py-1">
+            <div class="h-4 bg-slate-700 rounded w-3/4"></div>
+            <div class="h-8 bg-slate-700 rounded w-1/2"></div>
+          </div>
+        </div>
+        <div id="weatherContent" class="hidden space-y-2">
+          <div class="text-4xl font-extrabold text-amber-400" id="tempDisplay">--°C</div>
+          <p class="text-slate-400 text-sm" id="weatherDetails">Fetching location details...</p>
+        </div>
+      </div>
+
+      <!-- Quote Card -->
+      <div class="bg-slate-800 border border-slate-700 p-6 rounded-2xl shadow-xl">
+        <h2 class="text-lg font-semibold text-slate-300 mb-3 flex items-center gap-2">
+          <span>💡</span> Daily Inspiration
+        </h2>
+        <div id="quoteLoader" class="animate-pulse flex space-x-4">
+          <div class="flex-1 space-y-3 py-1">
+            <div class="h-4 bg-slate-700 rounded"></div>
+            <div class="h-4 bg-slate-700 rounded w-5/6"></div>
+          </div>
+        </div>
+        <div id="quoteContent" class="hidden space-y-3">
+          <blockquote class="text-slate-200 italic font-serif leading-relaxed" id="quoteText">
+            "Loading quote..."
+          </blockquote>
+          <p class="text-amber-400 text-sm font-semibold text-right" id="quoteAuthor">- Author</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
