@@ -108,3 +108,39 @@ async function loadDashboard() {
 // -------------------------------------------------------------
 refreshBtn.addEventListener('click', loadDashboard);
 document.addEventListener('DOMContentLoaded', loadDashboard);
+// ... existing app.js logic ...
+
+// -------------------------------------------------------------
+// 5. LOCAL STORAGE TASK LIST LOGIC (PASTE AT BOTTOM)
+// -------------------------------------------------------------
+const taskInput = document.getElementById('taskInput');
+const addTaskBtn = document.getElementById('addTaskBtn');
+const taskList = document.getElementById('taskList');
+
+let tasks = JSON.parse(localStorage.getItem('dev_tasks')) || [];
+
+function renderTasks() {
+  if (!taskList) return;
+  taskList.innerHTML = tasks.map((task, index) => `
+    <li class="flex justify-between items-center bg-slate-900 p-2.5 rounded-lg border border-slate-700">
+      <span>${task}</span>
+      <button onclick="deleteTask(${index})" class="text-red-400 hover:text-red-300 font-bold px-2">✕</button>
+    </li>
+  `).join('');
+  localStorage.setItem('dev_tasks', JSON.stringify(tasks));
+}
+
+window.deleteTask = function(index) {
+  tasks.splice(index, 1);
+  renderTasks();
+};
+
+addTaskBtn?.addEventListener('click', () => {
+  if (taskInput.value.trim()) {
+    tasks.push(taskInput.value.trim());
+    taskInput.value = '';
+    renderTasks();
+  }
+});
+
+renderTasks();
